@@ -9,7 +9,7 @@ import com.demo.loginservice.beans.Credentials;
 
 public class JacksonImpl {
 	private Credentials creds;
-	private ObjectW
+	
 
 	public String objToJson(Map<String,String> resultMap) {
 		creds = new Credentials();
@@ -26,5 +26,10 @@ public class JacksonImpl {
 				creds.setLastUpdateDate(resultMap.get(key));
 			}
 		}
+		/**
+		 * Start from here 
+		 * Return json from here
+		 */
+		return null;
 	}
 }

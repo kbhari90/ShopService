@@ -22,7 +22,11 @@ public class ShopService {
 			return Response.status(400).entity("One of the value is null").build();
 		}
 		
-		return Response.status(200).entity().build();
+		/**
+		 * Start from here
+		 */
+		//To be returned after creating json
+		return Response.status(200).entity("").build();
 	}
 	
 }
