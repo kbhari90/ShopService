@@ -14,19 +14,19 @@ import com.demo.loginservice.database.UserDaoImpl;
 public class ShopService {
 	private Map<String,String> resultMap;
 	
-	@POST
+	@GET
 	@Path("/{param1}/{param2}")
 	public Response check(@PathParam("param1") String userName, @PathParam("param2") String password) {
-		resultMap = new UserDaoImpl().getCredentials(userName, password);
-		if(resultMap.containsValue(null)){
-			return Response.status(400).entity("One of the value is null").build();
-		}
-		
+//		resultMap = new UserDaoImpl().getCredentials(userName, password);
+//		if(resultMap.containsValue(null)){
+//			return Response.status(400).entity("One of the value is null").build();
+//		}
+//		
 		/**
 		 * Start from here
 		 */
 		//To be returned after creating json
-		return Response.status(200).entity("").build();
+		return Response.status(200).entity("Hello "+userName+" "+password).build();
 	}
 	
 }
