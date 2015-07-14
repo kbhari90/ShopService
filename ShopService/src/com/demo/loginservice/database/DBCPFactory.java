@@ -17,17 +17,19 @@ public class DBCPFactory {
 	private String userName;
 	private String password;
 	private String url;
+	private String driver;
 	
 	public DBCPFactory() {
 		try {
 			props = new Properties();
 			logger.info("Getting db.properties file from classpath");
-			is = getClass().getResourceAsStream("db.properties");
+			is = getClass().getClassLoader().getResourceAsStream("db.properties");
 			logger.info("Loading db.properties file...");
 			props.load(is);
 			userName = props.getProperty("userName");
 			password = props.getProperty("password");
 			url = props.getProperty("url");
+			driver = props.getProperty("driver");
 		} catch (IOException e) {
 			logger.debug("Error thrown while reading db.properties file: ",e);
 		}
@@ -45,6 +47,7 @@ public class DBCPFactory {
 		bd.setUsername(userName);
 		bd.setPassword(password);
 		bd.setUrl(url);
+		bd.setDriverClassName(driver);
 		
 		return bd;
 		

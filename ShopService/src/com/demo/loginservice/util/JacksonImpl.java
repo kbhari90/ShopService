@@ -1,17 +1,27 @@
 package com.demo.loginservice.util;
 
-import java.util.Date;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
+
+
+
+
+
+import org.apache.log4j.Logger;
 
 import com.demo.loginservice.beans.Credentials;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 public class JacksonImpl {
 	private Credentials creds;
+	private ObjectWriter writer;
+	private String jsonFromObject;
+	
 	
 
 	public String objToJson(Map<String,String> resultMap) {
+		writer = new ObjectMapper().writer().withDefaultPrettyPrinter();
 		creds = new Credentials();
 		for(String key:resultMap.keySet()) {
 			if(key.equalsIgnoreCase("userId")) {
@@ -30,6 +40,15 @@ public class JacksonImpl {
 		 * Start from here 
 		 * Return json from here
 		 */
-		return null;
+		try {
+			
+			jsonFromObject = writer.writeValueAsString(creds);
+			
+		} catch (JsonProcessingException e) {
+			logger.debug("Error thrown while converting class object to json using jackson",e);
+		}
+		
+		return jsonFromObject;
 	}
+	final static Logger logger = Logger.getLogger(JacksonImpl.class);
 }
