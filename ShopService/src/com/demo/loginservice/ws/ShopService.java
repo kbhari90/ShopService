@@ -2,9 +2,9 @@ package com.demo.loginservice.ws;
 
 import java.util.Map;
 
-import javax.ws.rs.GET;
+import javax.ws.rs.FormParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -17,10 +17,10 @@ public class ShopService {
 	private Map<String,String> resultMap;
 	private String jsonFromObj;
 	
-	@GET
-	@Path("getUserDetails/{param1}/{param2}")
+	@POST
+	@Path("getUserDetails")
 	@Produces("application/json")
-	public Response getUserDetails(@PathParam("param1") String userName, @PathParam("param2") String password) {
+	public Response getUserDetails(@FormParam("userName") String userName, @FormParam("password") String password) {
 		resultMap = new UserDaoImpl().getCredentials(userName, password);
 		if(resultMap == null){
 			return Response.status(400).entity("One of the value is null").build();
@@ -31,10 +31,10 @@ public class ShopService {
 		return Response.ok(jsonFromObj, MediaType.APPLICATION_JSON).build();
 	}
 	
-	@GET
-	@Path("saveUserDetails/{param1}/{param2}")
+	@POST
+	@Path("saveUserDetails")
 	@Produces("application/text")
-	public Response saveUserCreds(@PathParam("param1") String userName, @PathParam("param2") String password) {
+	public Response saveUserCreds(@FormParam("userName") String userName, @FormParam("password") String password) {
 		String response = new UserDaoImpl().saveCredentials(userName, password);
 		if(response == null) {
 			return Response.status(400).entity("Failed to Register").build();
